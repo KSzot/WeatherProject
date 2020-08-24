@@ -1,4 +1,5 @@
 import '../css/main.scss';
+import 'bootstrap';
 import printMe from './print';
 function component() {
   const element = document.createElement('div');
@@ -11,5 +12,4 @@ function component() {
 
   return element;
 }
-
 document.body.appendChild(component());
