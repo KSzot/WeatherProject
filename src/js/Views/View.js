@@ -23,19 +23,44 @@ export default class View {
   }
 
   bindChangeCity(handler) {
+    console.log('work');
     this.btnConfirm.addEventListener('click', () => {
       if (this._getValue) {
-        handler(this._getValue);
+        handler(
+          this._getValue,
+          (obj) => this.displayWeather(obj),
+          (errMessage) => this.showTooltip(errMessage.message),
+          () => this.closeModal(),
+        );
       } else {
         this.showTooltip();
       }
     });
+    console.log('work2');
   }
 
-  showTooltip() {
+  showTooltip(text = 'Please enter name city') {
+    this.newName.title = text;
     $('[data-toggle="tooltip"]').tooltip('show');
     setTimeout(function () {
       $('[data-toggle="tooltip"]').tooltip('hide');
     }, 3000);
+  }
+
+  displayWeather(obj) {
+    this.nameCity.textContent = obj.name;
+    this.description.textContent = obj.weather[0].description;
+    this.temperatue.textContent = `${obj.main.temp} °C`;
+    this.img.setAttribute(
+      'src',
+      `http://openweathermap.org/img/wn/${obj.weather[0].icon}@2x.png`,
+    );
+    this.humidity.textContent = `Realtive Humidity: ${obj.main.humidity}%`;
+    this.pressure.textContent = `Pressure: ${obj.main.pressure} hPa`;
+    this.wind.textContent = `Wind speed: ${obj.wind.speed} m/s`;
+  }
+
+  closeModal() {
+    $('#exampleModalCenter').modal('hide');
   }
 }
