@@ -1,4 +1,5 @@
-export function getWeather(name = 'Warszawa') {
+import { setLocation } from './storage';
+export function getWeather(name) {
   return new Promise((resolve, reject) => {
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${name}&units=metric&appid=${process.env.API_KEY}`,
@@ -8,6 +9,7 @@ export function getWeather(name = 'Warszawa') {
         return result.json();
       })
       .then((result) => {
+        setLocation(name);
         resolve(result);
       })
       .catch((error) => error.then((body) => reject(body)));

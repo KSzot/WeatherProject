@@ -23,20 +23,18 @@ export default class View {
   }
 
   bindChangeCity(handler) {
-    console.log('work');
     this.btnConfirm.addEventListener('click', () => {
       if (this._getValue) {
         handler(
           this._getValue,
           (obj) => this.displayWeather(obj),
           (errMessage) => this.showTooltip(errMessage.message),
-          () => this.closeModal(),
+          this.closeModal,
         );
       } else {
         this.showTooltip();
       }
     });
-    console.log('work2');
   }
 
   showTooltip(text = 'Please enter name city') {

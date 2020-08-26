@@ -5,7 +5,6 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     app: ['@babel/polyfill', './src/js/index.js'],
-    print: './src/js/print.js',
   },
   devtool: 'inline-source-map',
   devServer: {
